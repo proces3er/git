@@ -71,6 +71,114 @@ git push --signed
    loose-objects:
    incremental-repack:
    pack-refs:
-   
+
 git maintainance start
 
+
+
+********************************************************************************
+
+ONLY COMBINE CHANGES FROM THE SAME TOPIC in a single commit
+The perfect commit
+    a.  add the right changes
+    b.  compose a good commit message
+
+a.
+    1. git add specific file
+    2. git diff index.html to check the changes
+    3. git add -p index.html (-p to patch level what to include or not)
+    
+    onyl stage the changes to be committed to first stage, rest to be left to "not staged for commit"
+
+b.
+    subject = concise summary of waht happened
+    body = more detailed explanation
+                1. what is now differenct
+                2. what the reason for the change
+                3. is there anything to watch out in particularly
+********************************************************************************
+BRANCHING STRATEGIES
+
+Mainline development (always be integrating)
+    -few branches
+    -relatively small commits
+    -high-quality testing &QA standards
+
+State, Release, and Feature Branches
+    - different types of branches
+    - fulfill different types of jobs
+
+Long-running & Short-lived branches
+
+Long-running
+    -existing through the complete lifetime of the proect
+    -often, they mirror stages in your dev life cycle
+    -common convetion: no direct commits (quality, release bundleing/patching)
+
+Short-lived 
+    -for new features, bug fixes, refactorings, experiements
+    -will be deleted after integration(merge/rebase)
+
+Popular MODEL
+Github flow:
+    one long running branch
+                    main        +       feature branches
+
+Gitflow
+    -more structure more rules
+    -long running branch
+                    main        +        develop
+    -short lived 
+                    features, releases, hotfixes.
+
+********************************************************************************
+git push --set-upstream origin xxxx
+
+PULL REQUESTS
+    pull request invites reviewers to provide feedback before merge
+
+FORKS
+
+
+********************************************************************************
+Merge conflicts
+    changes contradicts
+    when integrating commits from different sources
+    git merge   git rebase
+    git pull
+    git stash apply
+    git cherry-pick
+
+    how to undo a conflict and start over
+
+    git merge --abort
+    git rebase --abort
+
+
+********************************************************************************
+
+MERGE VS REBASE
+
+MERGE
+    1. common ancestor
+    2. last commit on branch 1
+    3. last commit on branch 2
+
+    fast forward merge
+        both branches share the exact same history
+
+    merge commit
+
+
+REBASE (DO NOT use rebase on commits thats pushed/shared on a remote repo,
+        only to be used to clean up local commit history before merging it into shared team branch)
+    Integrating with REBASE(rewrite commit history)
+    git rebase branch-B
+        1. git removes all commits A that happened after the common ancestor commit
+        2. git applies the new commit from branch B
+        3. the parked commit from A will be a new commit to the top of integrted commit from branch B
+
+Testing
+    unit test
+    integration test
+    end to end test
